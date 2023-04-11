@@ -76,6 +76,10 @@ function submitFormulario(e) {
         return;
     }
 
+
+    //Consultar la API con los resultados para obtner la cotizacion que los usuarios desean.
+    consultarAPI();
+
 }
 
 function mostrarAlerta(mensaje) {
@@ -94,4 +98,25 @@ function mostrarAlerta(mensaje) {
         }, 2000);
         console.log('mensaje :>> ', mensaje);
     }
+}
+
+function consultarAPI() {
+    const {moneda, criptomoneda} = objetoBusqueda;
+
+    const url= `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
+
+    fetch(url)
+        .then(respuesta =>{
+            console.log('respuesta :>> ', respuesta);
+            return respuesta.json();
+        })
+        .then(cotizacion =>{
+            //console.log(`Cotizacion de ${criptomoneda} a ${moneda}:`, cotizacion.DISPLAY[criptomoneda][moneda]);
+
+            mostrarCotizacionHTML(cotizacion.DISPLAY[criptomoneda][moneda])
+        })
+}
+
+function mostrarCotizacionHTML(cotizacion) {
+    console.log('cotizacion', cotizacion)
 }
