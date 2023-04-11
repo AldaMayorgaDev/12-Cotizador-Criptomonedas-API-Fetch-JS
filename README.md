@@ -1,3 +1,3 @@
-## API u-tilizada
+## API utilizada
 
 - https://min-api.cryptocompare.com/documentation
